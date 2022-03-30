@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="Get YouTube audio">
+    <meta property="og:description" content="Audio stream from YouTube"/>
+    <meta property="og:url" content="{{ url_for('index', _external=True) }}"/>
+    <meta property="og:title" content="YouTube audio only"/>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.svg') }}"/>
+    <title>YouTalk</title>
+    <style>
+    body {
+        background: no-repeat center fixed;
+        background-size: cover;
+        padding: 0;
+        margin: 0;
+        }
+    html, body, #container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        }
+    #top {
+        /*position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        text-align: center;*/
+        flex-shrink: 0;
+	    }
+    #middle {
+        background: linear-gradient(130deg, white, transparent);
+        flex-grow: 1;
+        overflow: auto;
+        min-height: 2em;
+        }
+    #bottom {
+        flex-shrink: 0;
+        }
+    #player {
+        width: 100%;
+        }
+    #youtube_url {
+        width: 100%;
+        }
+    #form {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        }
+    .inputs {
+        font-size: xxx-large;
+        }
+    #description {
+        white-space: pre-wrap;
+        }
+    .links {
+        font-size: x-large;
+        padding-bottom: 1em;
+        font-weight: bold;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        window.jQuery || document.write('<script src="{{ url_for('static', filename='jquery.min.js') }}">\x3C/script>')
+    </script>
+    <script src="{{ url_for('static', filename='yt.js') }}"></script>
+</head>
+<body>
+    <div id="container">
+        <div id="top">
+            <div id="form-container">
+                <form id="form">
+                    <input class="inputs" id="youtube_url" name="youtube_url" placeholder="YouTube URL" required="" type="url">
+                    <button class="inputs button" id="paste" type="button">📋</button>
+                    <button class="inputs button" id="submit" type="submit">Get&nbsp;🔊</button>
+                </form>
+            </div>
+        </div>
+        <div id="middle">
+            <img id="thumbnail" src="">
+            <div class="links" id="title"><a id="title_link" target="_blank" href=""></a><span id="by"></span><a id="channel_link" target="_blank" href=""></a></div>
+            <div class="info" id="description"></div>
+        </div>
+        <div id="bottom">
+            <div class="media">
+                <audio id="player" controls autoplay>
+                    <source src="" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

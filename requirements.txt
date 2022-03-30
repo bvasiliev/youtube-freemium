@@ -3,3 +3,4 @@ Flask
 Flask-Compress
 Flask-Caching
 Flask-Limiter
+gunicorn

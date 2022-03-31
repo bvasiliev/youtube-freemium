@@ -14,12 +14,24 @@ $(document).ready(function(){
 
     async function paste(input) {
         /* Mozilla has lapki but others are ok */
-        const clipboard = await navigator.clipboard.readText();
-        if (YtRegex.test(clipboard)) {
-            input.val(clipboard);
-            Form.submit();
+        if ('clipboard' in navigator) {
+            const clipboard = await navigator.clipboard.readText();
+            if (YtRegex.test(clipboard)) {
+                input.val(clipboard);
+                Form.submit();
+                };
             };
         };
+
+    async function updateMediaSession(data) {
+        if ('mediaSession' in navigator) {
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title: data.title,
+                artist: data.uploader,
+                artwork: data.artwork
+            });
+        };
+    };
 
     $("form").on("submit", function(event) {
         $.getJSON("/_v", { url: $("#youtube_url").val() },
@@ -33,6 +45,7 @@ $(document).ready(function(){
                 ChannelLinkA.text(data.uploader);
                 BySpan.text(" by ");
                 Description.text(data.description);
+                updateMediaSession(data);
             });
         return false;
         });

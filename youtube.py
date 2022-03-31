@@ -43,8 +43,24 @@ class Video(object):
             except youtube_dl.utils.DownloadError:
                 pass
 
+        if self.info:
+            self.__update_artwork__()
+
     @staticmethod
     def __get_video_info__(url):
         with downloader:
             result = downloader.extract_info(url)
         return result
+
+    def __update_artwork__(self):
+        """ YuoTube thumbnails list to MediaSession api artwork list """
+        art_id = 0
+        self.info['artwork'] = list()
+        for thumbnail in self.info['thumbnails']:
+            artwork = {'src': thumbnail['url'],
+                       'sizes': thumbnail['resolution'],
+                       'type': 'image/jpg',
+                       'id': art_id
+                       }
+            self.info['artwork'].append(artwork)
+            art_id += art_id

@@ -53,7 +53,7 @@ class Video(object):
         return result
 
     def __update_artwork__(self):
-        """ YuoTube thumbnails list to MediaSession api artwork list """
+        """ YouTube thumbnails list to MediaSession api artwork list """
         art_id = 0
         self.info['artwork'] = list()
         for thumbnail in self.info['thumbnails']:
@@ -63,4 +63,4 @@ class Video(object):
                        'id': art_id
                        }
             self.info['artwork'].append(artwork)
-            art_id += art_id
+            art_id += 1

@@ -4,7 +4,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta property="og:site_name" content="Get YouTube audio">
-    <meta property="og:description" content="Audio stream from YouTube"/>
     <meta property="og:url" content="{{ url_for('index', _external=True) }}"/>
     <meta property="og:title" content="YouTube audio only"/>
     <link rel="icon" href="{{ url_for('static', filename='favicon.svg') }}"/>
@@ -32,7 +31,6 @@
         flex-shrink: 0;
 	    }
     #middle {
-        background: linear-gradient(130deg, white, transparent);
         flex-grow: 1;
         overflow: auto;
         min-height: 2em;

@@ -1,16 +1,15 @@
 $(document).ready(function(){
     const YtRegex = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/g
-    let Audio = $("#player");
-    let Player = Audio[0];
-    let ThumbnailImg = $("#thumbnail");
-    let TitleLinkA = $("#title_link");
-    let ChannelLinkA = $("#channel_link");
-    let BySpan = $("#by");
-    let Description = $("#description");
-    let UrlInput = $("#youtube_url");
-    let Form = $("#form");
-    let MiddleDiv = $("#middle");
-    let Body = $("body");
+    const Audio = $("#player");
+    const Player = Audio[0];
+    const TitleLinkA = $("#title_link");
+    const ChannelLinkA = $("#channel_link");
+    const BySpan = $("#by");
+    const Description = $("#description");
+    const UrlInput = $("#youtube_url");
+    const Form = $("#form");
+    const MiddleDiv = $("#middle");
+    const Body = $("body");
 
     async function paste(input) {
         /* Mozilla has lapki but others are ok */
@@ -23,7 +22,7 @@ $(document).ready(function(){
             };
         };
 
-    async function updateMediaSession(data) {
+    function updateMediaSession(data) {
         if ('mediaSession' in navigator) {
             navigator.mediaSession.metadata = new MediaMetadata({
                 title: data.title,
@@ -33,12 +32,11 @@ $(document).ready(function(){
         };
     };
 
-    $("form").on("submit", function(event) {
+    Form.on("submit", function(event) {
         $.getJSON("/_v", { url: $("#youtube_url").val() },
             function updatePage(data) {
                 document.title = data.title + " - audio";
                 Audio.attr("src", data.url);
-                Body.css("background-image", "url(" + data.thumbnail + ")");
                 TitleLinkA.attr("href", data.webpage_url);
                 TitleLinkA.text(data.title);
                 ChannelLinkA.attr("href", data.uploader_url);
@@ -50,7 +48,7 @@ $(document).ready(function(){
         return false;
         });
 
-    $("#middle").on("click", function(){
+    MiddleDiv.on("click", function(){
         Player.paused ? Player.play() : Player.pause();
         });
 

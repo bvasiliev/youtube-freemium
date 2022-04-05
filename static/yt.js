@@ -43,20 +43,10 @@ $(document).ready(function(){
     };
 
     function addTimecode(chapter) {
-        const Item = $("<li>").attr("time", chapter.start_time);
-        Item.append(
-            $("<span>").addClass("chapter").text(chapter.title)
-            );
-        Item.append(
-            $("<span>").addClass("dots")
-            );
-        Item.append(
-            $("<span>").text(secondsToHMS(chapter.start_time)).addClass("hrefs").attr("time", chapter.start_time)
-            );
-        Item.on("click", function() {
-            audioSeek($(this).attr('time'))
-            });
-        Timecodes.append(Item);
+        const Item = $("<option>")
+            .val(chapter.start_time)
+            .text(secondsToHMS(chapter.start_time) + " — " + chapter.title);
+        Timecodes.append(Item)
     };
 
     Form.on("submit", function(event) {
@@ -82,6 +72,10 @@ $(document).ready(function(){
             });
         return false;
         });
+
+    Timecodes.on("change", function() {
+        audioSeek(this.value);
+    });
 
     DetailsDiv.on("click", function(){
         Player.paused ? Player.play() : Player.pause();

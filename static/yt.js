@@ -81,6 +81,10 @@ $(document).ready(function(){
         Player.paused ? Player.play() : Player.pause();
         });
 
+    UrlInput.on("click", function() {
+        this.select();
+        });
+
     $("#paste").on("click", function(){
         paste(UrlInput);
         });

@@ -15,7 +15,7 @@ html, body, #container {
 #top {
     flex-shrink: 0;
 	} 
-#details, #chapters {
+#details {
     flex-grow: 1;
     overflow: auto;
 } 
@@ -45,6 +45,6 @@ html, body, #container {
 }
 .links {
     font-size: x-large;
-    padding-bottom: 1em;
+    padding: 1em 0 1em 0;
     font-weight: bold;
 } 
